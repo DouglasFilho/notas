@@ -122,5 +122,18 @@ namespace notas.Tests
             Assert.True(empresa.DataUltimaAtualizacao > antes);
         }
 
+        [Fact]
+        public void CriarEmpresa_DeveInicializarDatasCorretamente()
+        {
+            var endereco = CriarEnderecoDummy();
+            var antes = DateTime.UtcNow;
+            var empresa = new Empresa("Teste", "Teste Fantasia", "12345678910111", endereco);
+            var dataCriacao = empresa.DataCriacao;
+
+            Assert.True(dataCriacao >= antes);
+            Assert.True(dataCriacao <= DateTime.UtcNow);
+            Assert.Equal(dataCriacao, empresa.DataUltimaAtualizacao);
+        }
+
     }
 }
