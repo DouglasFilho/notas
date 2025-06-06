@@ -40,10 +40,21 @@ namespace notas.Tests
             Assert.Equal("30110020", result);
         }
 
+        [Fact]
+        public void RemoverCaracteresEspeciaisComNullDeveRetornarVazio()
+        {
+            var metodo = typeof(Endereco).GetMethod("RemoverCaracteresEspeciais", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+            string result = (string)metodo.Invoke(null, new object?[] { null });
+
+            Assert.Equal(string.Empty, result);
+        }
+
         [Theory]
         [InlineData("30110020", true)]
         [InlineData("1234567", false)]
         [InlineData("ABC12345", false)]
+        [InlineData("123456789", false)]
+        [InlineData("", false)]
         public void ValidarCep_DeveRetornarCorreto(string cep, bool esperadoValido)
         {
             var valido = Endereco.ValidarCep(cep);
