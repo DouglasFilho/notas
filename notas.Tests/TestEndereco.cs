@@ -50,5 +50,12 @@ namespace notas.Tests
             Assert.Equal(esperadoValido, valido);
         }
 
+        [Fact]
+        public void ToString_DeveRetornarFormatado()
+        {
+            var endereco = new Endereco("Rua A", "", "123", "Centro", "Cidade", UF.SP, "30110-020");
+            Assert.Equal("Rua A, 123 - Centro, Cidade - SP, 30110020", endereco.ToString());
+        }
+
     }
 }
